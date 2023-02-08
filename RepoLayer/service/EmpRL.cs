@@ -38,7 +38,7 @@ namespace RepoLayer.service
                 empEntity.Salary = employeeRegi.Salary; 
                 empEntity.StartDate = employeeRegi.StartDate;
                 empEntity.Email = employeeRegi.Email;
-                empEntity.Password = employeeRegi.Password;
+                empEntity.Password = ConvertoEncrypt(employeeRegi.Password);
                 empEntity.Notes = employeeRegi.Notes;
 
                 empContext.EmpCFATable.Add(empEntity);
@@ -59,14 +59,31 @@ namespace RepoLayer.service
                 throw;
             }
         }
+        public static string ConvertoEncrypt(string password)
+        {
+            if (string.IsNullOrEmpty(password))
+                return "";
+            password += Key;
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            return Convert.ToBase64String(passwordBytes);
+        }
 
+        public static string ConvertoDecrypt(string base64EncodeData)
+        {
+            if (string.IsNullOrEmpty(base64EncodeData))
+                return "";
+            var base64EncodeBytes = Convert.FromBase64String(base64EncodeData);
+            var result = Encoding.UTF8.GetString(base64EncodeBytes);
+            result = result.Substring(0, result.Length - Key.Length);
+            return result;
+        }
         public string Login(LoginModel loginModel)
         {
             try
             {
-                var data = this.empContext.EmpCFATable.FirstOrDefault(x => x.Email == loginModel.Email && x.Password == loginModel.Password);
-                //var dPass = ConvertoDecrypt(data.Password);
-                if ( data != null)
+                var data = this.empContext.EmpCFATable.FirstOrDefault(x => x.Email == loginModel.Email);
+                var dPass = ConvertoDecrypt(data.Password);
+                if (dPass == loginModel.Password && data != null)
                 {
                     //loginModel.Email = data.Email;
                     //loginModel.Password = data.Password;
