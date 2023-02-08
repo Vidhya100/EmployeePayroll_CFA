@@ -37,5 +37,26 @@ namespace EmployeePayroll_CFA.Controllers
                 throw;
             }
         }
-     }
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult LoginUser(LoginModel loginModel)
+        {
+            try
+            {
+                var result = iempBL.Login(loginModel);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Login successful", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Login Failed." });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+    }
 }

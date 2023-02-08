@@ -9,6 +9,7 @@ namespace RepoLayer.Interface
     public interface IEmpRL
     {
         public EmpEntity Registration(EmpoyeeRegi employeeRegi);
+        public LoginModel Login(LoginModel loginModel);
 
     }
 }

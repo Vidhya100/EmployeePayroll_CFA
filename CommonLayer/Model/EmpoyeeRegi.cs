@@ -13,6 +13,8 @@ namespace CommonLayer.Model
         public string Department { get; set; }
         public float Salary { get; set; }
         public DateTime StartDate { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public string Notes { get; set; }
     }
 }
