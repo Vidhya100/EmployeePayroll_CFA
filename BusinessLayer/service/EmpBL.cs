@@ -27,7 +27,7 @@ namespace BusinessLayer.service
                 throw;
             }
         }
-        public LoginModel Login(LoginModel loginModel)
+        public string Login(LoginModel loginModel)
         {
             try
             {

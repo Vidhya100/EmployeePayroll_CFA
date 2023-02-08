@@ -9,7 +9,7 @@ namespace BusinessLayer.Interface
     public interface IEmpBL
     {
         public EmpEntity Registration(EmpoyeeRegi employeeRegi);
-        public LoginModel Login(LoginModel loginModel);
+        public string Login(LoginModel loginModel);
 
 
     }

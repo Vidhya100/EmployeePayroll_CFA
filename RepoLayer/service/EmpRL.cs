@@ -1,11 +1,15 @@
 ﻿
 using CommonLayer.Model;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using RepoLayer.Context;
 using RepoLayer.Entity;
 using RepoLayer.Interface;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace RepoLayer.service
@@ -13,10 +17,13 @@ namespace RepoLayer.service
     public class EmpRL :IEmpRL
     {
         private readonly EmpContext empContext;
+        private readonly IConfiguration iconfiguration;
+        public static string Key = "vidhya@@kfxcbv@";
 
-        public EmpRL(EmpContext empContext)
+        public EmpRL(EmpContext empContext, IConfiguration iconfiguration)
         {
             this.empContext = empContext;
+            this.iconfiguration = iconfiguration;
         }
 
         public EmpEntity Registration(EmpoyeeRegi employeeRegi)
@@ -53,7 +60,7 @@ namespace RepoLayer.service
             }
         }
 
-        public LoginModel Login(LoginModel loginModel)
+        public string Login(LoginModel loginModel)
         {
             try
             {
@@ -61,14 +68,42 @@ namespace RepoLayer.service
                 //var dPass = ConvertoDecrypt(data.Password);
                 if ( data != null)
                 {
-                    loginModel.Email = data.Email;
-                    loginModel.Password = data.Password;
-                    //var token = GenerateSecurityToken(data.Email, data.UserId);
-                    //return token;
-                    return loginModel;
+                    //loginModel.Email = data.Email;
+                    //loginModel.Password = data.Password;
+                  //  return loginModel;
+                    var token = GenerateSecurityToken(data.Email, data.EmpId);
+                    return token;
+                    
                 }
                 else
                     return null;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        public string GenerateSecurityToken(string email, long UserId)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(this.iconfiguration["JWT:Key"]);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                    new Claim(ClaimTypes.Email, email),
+                    new Claim("UserId", UserId.ToString())
+                }),
+                    Expires = DateTime.UtcNow.AddMinutes(30),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                return tokenHandler.WriteToken(token);
             }
             catch (Exception ex)
             {
