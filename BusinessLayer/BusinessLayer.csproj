@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="service\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\RepoLayer\RepoLayer.csproj" />
   </ItemGroup>
 
