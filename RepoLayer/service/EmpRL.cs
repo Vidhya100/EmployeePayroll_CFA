@@ -126,5 +126,29 @@ namespace RepoLayer.service
                 throw;
             }
         }
+        public bool DeleteEmp(long empId, long userId)
+        {
+            try
+            {
+                var result = userContext.EmpTable.FirstOrDefault(e => e.EmpId == empId && e.UserId == userId);
+
+                if (result != null)
+                {
+
+                    userContext.EmpTable.Remove(result);
+                    userContext.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

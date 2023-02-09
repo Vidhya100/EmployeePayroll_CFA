@@ -11,5 +11,6 @@ namespace RepoLayer.Interface
         public EmpEntity AddEmp(EmpModel empModel, long userId);
         public IEnumerable<EmpEntity> GetAllEmployee(long userId);
         public bool UpdateEmp(long empId, long userId, EmpModel empModel);
+        public bool DeleteEmp(long empId, long userId);
     }
 }

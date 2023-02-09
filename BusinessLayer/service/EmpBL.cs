@@ -51,5 +51,16 @@ namespace BusinessLayer.service
                 throw;
             }
         }
+        public bool DeleteEmp(long empId, long userId)
+        {
+            try
+            {
+                return iempRL.DeleteEmp(empId, userId);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

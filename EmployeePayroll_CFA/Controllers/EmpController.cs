@@ -86,5 +86,27 @@ namespace EmployeePayroll_CFA.Controllers
                 throw;
             }
         }
+        [HttpDelete]
+        [Route("Delete")]
+        public IActionResult DeleteEmp(long empId)
+        {
+            try
+            {
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = iempBL.DeleteEmp(empId, userId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Deleted Successfully", data = result });
+                }
+                else
+                {
+                   return BadRequest(new { success = false, message = "Not Deleted." });
+                }
+            }
+            catch (Exception ex)
+            {
+                  return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
     }
 }
