@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RepoLayer.Interface
+namespace BusinessLayer.Interface
 {
-    public interface IEmpRL
+    public interface IUserBL
     {
-        public EmpEntity Registration(EmpoyeeRegi employeeRegi);
+        public UserEntity Registration(UserRegi userRegi);
         public string Login(LoginModel loginModel);
 
     }

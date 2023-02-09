@@ -1,11 +1,13 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -13,18 +15,18 @@ namespace EmployeePayroll_CFA.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmpController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IEmpBL iempBL;
+        private readonly IUserBL iempBL;
 
-        public EmpController(IEmpBL iempBL)
+        public UserController(IUserBL iempBL)
         {
             this.iempBL = iempBL;
         }
 
         [HttpPost]
         [Route("Registration")]
-        public IActionResult RegisterEmp(EmpoyeeRegi employeeRegi)
+        public IActionResult RegisterEmp(UserRegi employeeRegi)
         {
             try
             {
@@ -64,6 +66,5 @@ namespace EmployeePayroll_CFA.Controllers
                 throw;
             }
         }
-        
     }
 }

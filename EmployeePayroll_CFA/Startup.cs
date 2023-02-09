@@ -35,11 +35,11 @@ namespace EmployeePayroll_CFA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<EmpContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:EmpCFADB"]));
+            services.AddDbContext<UserContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:EmpCFADB"]));
             services.AddControllers();
 
-            services.AddTransient<IEmpRL, EmpRL>();
-            services.AddTransient<IEmpBL, EmpBL>();
+            services.AddTransient<IUserRL, UserRL>();
+            services.AddTransient<IUserBL, UserBL>();
 
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
@@ -111,6 +111,7 @@ namespace EmployeePayroll_CFA
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

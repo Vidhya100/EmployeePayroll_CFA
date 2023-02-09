@@ -6,11 +6,11 @@ using System.Text;
 
 namespace RepoLayer.Context
 {
-    public class EmpContext : DbContext
+    public class UserContext : DbContext
     {
-        public EmpContext(DbContextOptions options) : base(options)
+        public UserContext(DbContextOptions options) : base(options)
         { }
         //Dbset create a table
-        public DbSet<EmpEntity> EmpCFATable { get; set; }
+        public DbSet<UserEntity> UserTable { get; set; }
     }
 }

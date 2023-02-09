@@ -14,40 +14,34 @@ using System.Text;
 
 namespace RepoLayer.service
 {
-    public class EmpRL :IEmpRL
+    public class UserRL :IUserRL
     {
-        private readonly EmpContext empContext;
+        private readonly UserContext userContext;
         private readonly IConfiguration iconfiguration;
         public static string Key = "vidhya@@kfxcbv@";
 
-        public EmpRL(EmpContext empContext, IConfiguration iconfiguration)
+        public UserRL(UserContext userContext, IConfiguration iconfiguration)
         {
-            this.empContext = empContext;
+            this.userContext = userContext;
             this.iconfiguration = iconfiguration;
         }
 
-        public EmpEntity Registration(EmpoyeeRegi employeeRegi)
+        public UserEntity Registration(UserRegi userRegi)
         {
             try
             {
-                EmpEntity empEntity = new EmpEntity();  
-                empEntity.EmpName = employeeRegi.EmpName;
-                empEntity.ProfileImg = employeeRegi.ProfileImg;
-                empEntity.Gender = employeeRegi.Gender;
-                empEntity.Department = employeeRegi.Department;
-                empEntity.Salary = employeeRegi.Salary; 
-                empEntity.StartDate = employeeRegi.StartDate;
-                empEntity.Email = employeeRegi.Email;
-                empEntity.Password = ConvertoEncrypt(employeeRegi.Password);
-                empEntity.Notes = employeeRegi.Notes;
+                UserEntity userEntity = new UserEntity();
+                userEntity.FirstName = userRegi.FirstName;
+                userEntity.LastName = userRegi.LastName;
+                userEntity.Email = userRegi.Email;
+                userEntity.Password = ConvertoEncrypt(userRegi.Password);
+                userContext.UserTable.Add(userEntity);
 
-                empContext.EmpCFATable.Add(empEntity);
-
-                int result = empContext.SaveChanges();
+                int result = userContext.SaveChanges();
 
                 if(result != 0)
                 {
-                    return empEntity;
+                    return userEntity;
                 }
                 else
                 {
@@ -81,14 +75,14 @@ namespace RepoLayer.service
         {
             try
             {
-                var data = this.empContext.EmpCFATable.FirstOrDefault(x => x.Email == loginModel.Email);
+                var data = this.userContext.UserTable.FirstOrDefault(x => x.Email == loginModel.Email);
                 var dPass = ConvertoDecrypt(data.Password);
                 if (dPass == loginModel.Password && data != null)
                 {
                     //loginModel.Email = data.Email;
                     //loginModel.Password = data.Password;
                   //  return loginModel;
-                    var token = GenerateSecurityToken(data.Email, data.EmpId);
+                    var token = GenerateSecurityToken(data.Email, data.UserId);
                     return token;
                     
                 }
@@ -128,5 +122,6 @@ namespace RepoLayer.service
             }
 
         }
+
     }
 }

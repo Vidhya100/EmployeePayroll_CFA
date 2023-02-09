@@ -8,19 +8,19 @@ using System.Text;
 
 namespace BusinessLayer.service
 {
-    public class EmpBL : IEmpBL
+    public class UserBL : IUserBL
     {
-        private readonly IEmpRL iempRL;
+        private readonly IUserRL iuserRL;
 
-        public EmpBL(IEmpRL iempRL)
+        public UserBL(IUserRL iuserRL)
         {
-            this.iempRL = iempRL;
+            this.iuserRL = iuserRL;
         }
-        public EmpEntity Registration(EmpoyeeRegi employeeRegi)
+        public UserEntity Registration(UserRegi userRegi)
         {
             try
              {
-                return iempRL.Registration(employeeRegi);
+                return iuserRL.Registration(userRegi);
              }
             catch (Exception ex)
             {
@@ -31,7 +31,7 @@ namespace BusinessLayer.service
         {
             try
             {
-                return iempRL.Login(loginModel);
+                return iuserRL.Login(loginModel);
             }
             catch (Exception ex)
             {
