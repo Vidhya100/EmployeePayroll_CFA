@@ -12,5 +12,6 @@ namespace RepoLayer.Context
         { }
         //Dbset create a table
         public DbSet<UserEntity> UserTable { get; set; }
+        public DbSet<EmpEntity> EmpTable { get; set; }
     }
 }
