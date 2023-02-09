@@ -17,11 +17,11 @@ namespace EmployeePayroll_CFA.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserBL iempBL;
+        private readonly IUserBL iuserBL;
 
-        public UserController(IUserBL iempBL)
+        public UserController(IUserBL iuserBL)
         {
-            this.iempBL = iempBL;
+            this.iuserBL = iuserBL;
         }
 
         [HttpPost]
@@ -30,7 +30,7 @@ namespace EmployeePayroll_CFA.Controllers
         {
             try
             {
-                var result = iempBL.Registration(employeeRegi);
+                var result = iuserBL.Registration(employeeRegi);
                 if(result != null)
                 {
                     return Ok(new { success = true, message = "Registered Successfully", data = result });
@@ -51,7 +51,7 @@ namespace EmployeePayroll_CFA.Controllers
         {
             try
             {
-                var result = iempBL.Login(loginModel);
+                var result = iuserBL.Login(loginModel);
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "Login successful", data = result });

@@ -41,6 +41,9 @@ namespace EmployeePayroll_CFA
             services.AddTransient<IUserRL, UserRL>();
             services.AddTransient<IUserBL, UserBL>();
 
+            services.AddTransient<IEmpRL, EmpRL>();
+            services.AddTransient<IEmpBL, EmpBL>();
+
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {
