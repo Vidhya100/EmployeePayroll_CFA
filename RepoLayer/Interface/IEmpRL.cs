@@ -9,5 +9,6 @@ namespace RepoLayer.Interface
     public interface IEmpRL
     {
         public EmpEntity AddEmp(EmpModel empModel, long userId);
+        public IEnumerable<EmpEntity> GetAllEmployee(long userId);
     }
 }

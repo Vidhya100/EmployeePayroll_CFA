@@ -21,7 +21,7 @@ namespace EmployeePayroll_CFA.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("Create")]
+        [Route("Add")]
         public IActionResult AddEmp(EmpModel empModel)
         {
             try
@@ -40,6 +40,28 @@ namespace EmployeePayroll_CFA.Controllers
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+        [HttpGet]
+        [Route("Get")]
+        public IActionResult GetAllEmployee()
+        {
+            try
+            {
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = iempBL.GetAllEmployee(userId);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Get Notes Successfully", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Unable to get Note." });
+                }
+            }
+            catch (Exception ex)
+            {
+                 return BadRequest(new { success = false, message = ex.Message });
             }
         }
     }

@@ -53,5 +53,18 @@ namespace RepoLayer.service
                 throw;
             }
         }
+        public IEnumerable<EmpEntity> GetAllEmployee(long userId)
+        {
+            try
+            {
+                var result = userContext.EmpTable.Where(e => e.UserId == userId);
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

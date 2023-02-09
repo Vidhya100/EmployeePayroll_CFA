@@ -9,5 +9,6 @@ namespace BusinessLayer.Interface
     public interface IEmpBL
     {
         public EmpEntity AddEmp(EmpModel empModel, long userId);
+        public IEnumerable<EmpEntity> GetAllEmployee(long userId);
     }
 }

@@ -29,5 +29,16 @@ namespace BusinessLayer.service
             }
 
         }
+        public IEnumerable<EmpEntity> GetAllEmployee(long userId)
+        {
+            try
+            {
+                return iempRL.GetAllEmployee(userId);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
