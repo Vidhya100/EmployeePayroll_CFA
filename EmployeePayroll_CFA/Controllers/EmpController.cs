@@ -52,16 +52,38 @@ namespace EmployeePayroll_CFA.Controllers
                 var result = iempBL.GetAllEmployee(userId);
                 if (result != null)
                 {
-                    return Ok(new { success = true, message = "Get Notes Successfully", data = result });
+                    return Ok(new { success = true, message = "Fetched Successfully", data = result });
                 }
                 else
                 {
-                    return BadRequest(new { success = false, message = "Unable to get Note." });
+                    return BadRequest(new { success = false, message = "Unable to get list." });
                 }
             }
             catch (Exception ex)
             {
                  return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+        [HttpPut]
+        [Route("Update")]
+        public IActionResult Update(long empId, EmpModel empModel)
+        {
+            try
+            {
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+                var result = iempBL.UpdateEmp(empId, userId, empModel);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Updated Successfully", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Not get updated try again." });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }

@@ -40,5 +40,16 @@ namespace BusinessLayer.service
                 throw;
             }
         }
+        public bool UpdateEmp(long empId, long userId, EmpModel empModel)
+        {
+            try
+            {
+                return iempRL.UpdateEmp(empId, userId, empModel);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

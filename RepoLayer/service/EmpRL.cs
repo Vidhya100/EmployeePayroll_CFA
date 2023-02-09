@@ -66,5 +66,65 @@ namespace RepoLayer.service
                 throw;
             }
         }
+        public bool UpdateEmp(long empId, long userId, EmpModel empModel)
+        {
+            try
+            {
+                var result = userContext.EmpTable.FirstOrDefault(e => e.EmpId == empId && e.UserId == userId);
+
+                if (result != null)
+                {
+                    if (empModel.EmpName != null)
+                    {
+                        result.EmpName = empModel.EmpName;
+                    }
+                    if (empModel.ProfileImg != null)
+                    {
+                        result.ProfileImg = empModel.ProfileImg;
+                    }
+                    if (empModel.Gender != null)
+                    {
+                        result.Gender = empModel.Gender;
+                    }
+                    if (empModel.Department != null)
+                    {
+                        result.Department = empModel.Department;
+                    }
+                    if (empModel.Salary != null)
+                    {
+                        result.Salary = empModel.Salary;
+                    }
+                    if (empModel.StartDate  != null)
+                    {
+                        result.StartDate = empModel.StartDate;
+                    }
+                    if (empModel.Email != null)
+                    {
+                        result.Email = empModel.Email;
+                    }
+                    if (empModel.Password != null)
+                    {
+                        result.Password = empModel.Password;
+                    }
+                    if (empModel.Notes != null)
+                    {
+                        result.Notes = empModel.Notes;
+                    }
+
+                    //result.Edited = DateTime.Now;
+                    userContext.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
