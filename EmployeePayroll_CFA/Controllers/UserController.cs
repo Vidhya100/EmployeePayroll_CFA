@@ -26,11 +26,11 @@ namespace EmployeePayroll_CFA.Controllers
 
         [HttpPost]
         [Route("Registration")]
-        public IActionResult RegisterEmp(UserRegi employeeRegi)
+        public IActionResult RegisterEmp(UserRegi userRegi)
         {
             try
             {
-                var result = iuserBL.Registration(employeeRegi);
+                var result = iuserBL.Registration(userRegi);
                 if(result != null)
                 {
                     return Ok(new { success = true, message = "Registered Successfully", data = result });
@@ -40,7 +40,7 @@ namespace EmployeePayroll_CFA.Controllers
                     return BadRequest(new {success= false, message = "Registration failed"});
                 }
             }
-            catch(System.Exception ex)
+            catch(Exception ex)
             {
                 throw;
             }

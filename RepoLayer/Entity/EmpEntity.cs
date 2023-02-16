@@ -15,11 +15,10 @@ namespace RepoLayer.Entity
         public string EmpName { get; set; }
         public string ProfileImg { get; set; }
         public string Gender { get; set; }
+       
         public string Department { get; set; }
         public float Salary { get; set; }
         public DateTime StartDate { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
         public string Notes { get; set; }
         [ForeignKey("User")]
         public long UserId { get; set; }

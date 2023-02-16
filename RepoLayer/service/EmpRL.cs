@@ -30,9 +30,7 @@ namespace RepoLayer.service
                     empEntity.EmpName = empModel.EmpName;
                     empEntity.ProfileImg = empModel.ProfileImg;
                     empEntity.Gender = empModel.Gender;
-                    empEntity.Email = empModel.Email;
                     empEntity.Department = empModel.Department;
-                    empEntity.Password = empModel.Password;
                     empEntity.Salary = empModel.Salary;
                     empEntity.StartDate = empModel.StartDate;
                     empEntity.Notes = empModel.Notes;
@@ -97,14 +95,6 @@ namespace RepoLayer.service
                     if (empModel.StartDate  != null)
                     {
                         result.StartDate = empModel.StartDate;
-                    }
-                    if (empModel.Email != null)
-                    {
-                        result.Email = empModel.Email;
-                    }
-                    if (empModel.Password != null)
-                    {
-                        result.Password = empModel.Password;
                     }
                     if (empModel.Notes != null)
                     {

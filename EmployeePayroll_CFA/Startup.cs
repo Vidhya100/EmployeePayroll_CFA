@@ -37,6 +37,7 @@ namespace EmployeePayroll_CFA
         {
             services.AddDbContext<UserContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:EmpCFADB"]));
             services.AddControllers();
+            //services.AddControllers().AddNewtonsoftJson();
 
             services.AddTransient<IUserRL, UserRL>();
             services.AddTransient<IUserBL, UserBL>();
@@ -112,6 +113,11 @@ namespace EmployeePayroll_CFA
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(x => x
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
 
             app.UseRouting();
             app.UseAuthentication();

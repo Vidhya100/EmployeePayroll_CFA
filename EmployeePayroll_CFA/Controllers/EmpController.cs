@@ -22,7 +22,7 @@ namespace EmployeePayroll_CFA.Controllers
         [Authorize]
         [HttpPost]
         [Route("Add")]
-        public IActionResult AddEmp(EmpModel empModel)
+        public IActionResult AddEmp( EmpModel empModel)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace EmployeePayroll_CFA.Controllers
             }
             catch (Exception ex)
             {
-                 return BadRequest(new { success = false, message = ex.Message });
+                throw;
             }
         }
         [HttpPut]
@@ -94,7 +94,7 @@ namespace EmployeePayroll_CFA.Controllers
             {
                 long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
                 var result = iempBL.DeleteEmp(empId, userId);
-                if (result != null)
+                if (result == true)
                 {
                     return Ok(new { success = true, message = "Deleted Successfully", data = result });
                 }
@@ -105,7 +105,7 @@ namespace EmployeePayroll_CFA.Controllers
             }
             catch (Exception ex)
             {
-                  return BadRequest(new { success = false, message = ex.Message });
+                throw;
             }
         }
     }
